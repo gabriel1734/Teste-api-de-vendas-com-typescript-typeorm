@@ -1,7 +1,7 @@
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import Customer from '../entities/Customer';
-import CustomerRepository from '../repositories/CustomersRepository';
+import Customer from '../typeorm/entities/Customer';
+import CustomerRepository from '../typeorm/repositories/CustomersRepository';
 
 interface IRequest {
   name: string;
@@ -14,7 +14,7 @@ class CreateCustomerService {
     const emailExists = await customersRepository.findByEmail(email);
 
     if (emailExists) {
-      throw new AppError('Email adrress already used.', 400);
+      throw new AppError('Email address already used.', 400);
     }
 
     const customer = customersRepository.create({

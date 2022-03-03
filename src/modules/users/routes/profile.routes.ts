@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import { celebrate, Joi, Segments } from 'celebrate';
 import isAuthenticated from '@shared/http/middlewares/isAuthenticated';
-import ProilleController from '../controllers/ProfileController';
+import ProfileController from '../controllers/ProfileController';
 
 export const profileRouter = Router();
 
-const profileController = new ProilleController();
+const profileController = new ProfileController();
 
 profileRouter.use(isAuthenticated);
 profileRouter.get('/', profileController.show);

@@ -1,9 +1,8 @@
 import { Request, Response } from 'express';
-import CreateUserService from '../services/CreateUserService';
 import ShowProfileService from '../services/ShowProfileService';
 import UpdateProfileService from '../services/UpdateProfileService';
 
-export default class ProilleController {
+export default class ProfileController {
   public async show(req: Request, res: Response): Promise<Response> {
     const ShowProfile = new ShowProfileService();
     const user_id = req.user.id;
