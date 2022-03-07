@@ -1,3 +1,4 @@
+import RedisCache from '@shared/cache/RedisCache';
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
 import Product from '../typeorm/entities/Product';
@@ -18,13 +19,17 @@ class CreateProductService {
       throw new AppError('There is already one product with this name', 409);
     }
 
+    const redisCache = new RedisCache();
+
     const product = productsRepository.create({
       name,
       price,
       quantity,
     });
 
-    await productsRepository.save(product);
+    await redisCache.invalidate('api-vendas-PRODUCT_LIST');
+
+    await await productsRepository.save(product);
 
     return product;
   }
